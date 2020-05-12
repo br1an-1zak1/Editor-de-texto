@@ -1,47 +1,65 @@
 "use strict";
 const $ = (value) => document.querySelector(value);
 
-const handleFocus = () => $('#texto').focus();
 
 const objLiterals = {
   noteBlock: $(".note"),
-  text: $("#note"),
-  smText: $("#lowerText"),
-  lgText: $("#upperText"),
+  // smText: $("#lowerText"),
+  // lgText: $("#upperText"),
   bold: $("#bold"),
   italic: $("#italic"),
   underline: $("#underline"),
-  color: $("#textColor"),
+  // color: $("#textColor"),
 }
-const msg = "Você ultrapassou minhas expectativas! 🎉";
-
+const msg = "Você ultrapassou minhas expectativas!";
 let count = 0;
 
-objLiterals.noteBlock.addEventListener("click", () => handleFocus())
+function handleEdition(type){
+  objLiterals[type].addEventListener("click", () =>{
+    document.execCommand(type, true, null)
+  })
+}
 
-objLiterals.smText.addEventListener("click", () => {
-  if (count > -4) {
-    document.execCommand("decreaseFontSize", false, null);
-    count--;
-  } else alert(msg);
-});
+objLiterals.noteBlock.addEventListener("click", () => $("#texto").focus())
 
-objLiterals.lgText.addEventListener("click", () => {
-  if (count < 10) {
-    document.execCommand("increaseFontSize", false, null);
-    count++;
-    console.log(count);
-  } else alert(msg);
-});
+handleEdition("bold");
 
-objLiterals.bold.addEventListener("click", () => {
-  document.execCommand("bold", false, null);
-});
+handleEdition("italic");
 
-objLiterals.italic.addEventListener("click", () => {
-  document.execCommand('italic', false, null);
-})
+handleEdition("underline");
 
-objLiterals.underline.addEventListener('click', () => {
-  document.execCommand('underline', false, null);
-})
+
+// objLiterals.lgText.addEventListener("click", () => {
+//   if (count < 10) {
+//     document.execCommand("increaseFontSize", false, null);
+//     count++;
+//     console.log(count);
+//   } else alert(msg);
+// });
+
+// objLiterals.bold.addEventListener("click", () => {
+//   document.execCommand("bold", false, null);
+// });
+
+// objLiterals.italic.addEventListener("click", () => {
+//   document.execCommand('italic', false, null);
+// })
+
+// objLiterals.underline.addEventListener('click', () => {
+//   document.execCommand('underline', false, null);
+// })
+
+// const mutationObserver = new MutationObserver((mutation)=>{
+
+//   console.log(mutation);
+
+// });
+
+//utilizar Mutation Observer?? execCommand is deprecated, não funciona no chrome
+// objLiterals.smText.addEventListener("click", () => {
+//   if (count > -4) {
+//     console.log(document.execCommand("decreaseFontSize", true, null));
+//     count--;
+//   } else alert(msg);
+// });
+
